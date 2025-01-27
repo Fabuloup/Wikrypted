@@ -80,6 +80,10 @@ public static class Gameplay
         
         for (int y = 0; y < linesEncoded.Count; y++)
         {
+            if (linesOriginal[y].Length == 0)
+            {
+                continue;
+            }
             for (int x = 0; x < linesEncoded[y].Length; x++)
             {
                 char originalChar = linesOriginal[y][x];
@@ -146,6 +150,11 @@ public static class Gameplay
 
         foreach (var line in lines)
         {
+            if (line.Length == 0)
+            {
+                continue;
+            }
+            
             if (line.Length <= consoleWidth)
             {
                 result.Add(line);
