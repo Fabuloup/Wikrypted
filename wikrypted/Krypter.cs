@@ -35,7 +35,7 @@ public class Krypter
             SetKey();
         }
 
-        var encodedChars = input.Select(c => c == '\n' ? c : (char)(c + PerlinNoise(Key.GetHashCode() + (int)(c - '0')) * 10)).ToArray();
+        var encodedChars = input.Select(c => c == '\n' ? c : (char)(c + PerlinNoise(Key.GetHashCode() + (int)(c - '0')) * 3)).ToArray();
         return new string(encodedChars);
     }
 
