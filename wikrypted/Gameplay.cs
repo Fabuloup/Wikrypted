@@ -44,9 +44,10 @@ public static class Gameplay
             }
             else if (keyInfo.Key == ConsoleKey.Backspace)
             {
-                foreach (var letter in originalArticle.Description)
+                for (int i = 0; i < originalArticle.Description.Length; i++)
                 {
-                    if (!lookupTable.ContainsKey(letter) || char.ToLower(lookupTable[letter]) != char.ToLower(letter))
+                    var letter = originalArticle.Description[i];
+                    if (letter != encodedArticle.Description[i] && (!lookupTable.ContainsKey(letter) || char.ToLower(lookupTable[letter]) != char.ToLower(letter)))
                     {
                         lookupTable[letter] = letter;
                         break;
