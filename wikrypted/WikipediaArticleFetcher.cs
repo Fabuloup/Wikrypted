@@ -11,7 +11,7 @@ public static class WikipediaArticleFetcher
 {
     private const string RandomArticleUrl = "https://en.wikipedia.org/wiki/Special:Random";
     private static readonly HttpClient client = new HttpClient();
-    private const string localJsonFilePath = "articles.json";
+    private static readonly string localJsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "articles.json");
 
     public static async Task<string> GetRandomArticleUrl()
     {
