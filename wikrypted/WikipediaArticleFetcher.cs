@@ -15,10 +15,33 @@ public static class WikipediaArticleFetcher
 
     public static async Task<string> GetRandomArticleUrl()
     {
-        HttpResponseMessage response = await client.GetAsync(RandomArticleUrl);
-        response.EnsureSuccessStatusCode();
-        
-        return response.RequestMessage.RequestUri.ToString();
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(RandomArticleUrl);
+            if (!response.IsSuccessStatusCode)
+            {
+                return GetRandomArticleUrlLocally();
+            }
+            
+            return response.RequestMessage.RequestUri.ToString();
+        }
+        catch (Exception)
+        {
+            return GetRandomArticleUrlLocally();
+        }
+    }
+    
+    private static string GetRandomArticleUrlLocally()
+    {
+        var articles = LoadArticlesFromFile();
+        if (articles.Any())
+        {
+            return articles[new Random().Next(articles.Count)].Url;
+        }
+        else
+        {
+            throw new HttpRequestException("Failed to fetch a random article and no local articles are available.");
+        }
     }
 
     public static async Task<WikipediaArticle> GetRandomArticleAsync()
