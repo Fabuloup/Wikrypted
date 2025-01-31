@@ -47,7 +47,7 @@ public static class Gameplay
                 for (int i = 0; i < originalArticle.Description.Length; i++)
                 {
                     var letter = originalArticle.Description[i];
-                    if (letter != encodedArticle.Description[i] && (!lookupTable.ContainsKey(letter) || char.ToLower(lookupTable[letter]) != char.ToLower(letter)))
+                    if (letter != encodedArticle.Description[i] && (!lookupTable.ContainsKey(letter) || lookupTable[letter] != letter))
                     {
                         lookupTable[letter] = letter;
                         break;
